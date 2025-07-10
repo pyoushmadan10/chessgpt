@@ -1,40 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# ChessGPT
+
+ChessGPT is an AI-powered chatbot web application that answers chess-related questions using Retrieval-Augmented Generation (RAG) and the Gemini API. It leverages Next.js (App Router), React, LangChain, DataStax Astra DB, and modern authentication (Clerk-ready). The app features a beautiful chess-themed UI and provides expert-level chess insights, strategies, and resources.
+
+---
+
+## Features
+
+- **AI Chatbot**: Ask any chess question and get expert, markdown-formatted answers.
+- **RAG Pipeline**: Combines Gemini LLM with a vector database for context-aware responses.
+- **Modern UI**: Responsive, chess-themed design with animated backgrounds and glowing effects.
+- **Authentication Ready**: Easily add Clerk for user authentication.
+- **Markdown Support**: Answers are formatted for readability and clarity.
+- **Prompt Suggestions**: Quick-start prompts for new users.
+
+---
+
+## Tech Stack
+
+- **Frontend**: Next.js (App Router), React, TypeScript
+- **AI/LLM**: Google Gemini API via `@google/generative-ai`
+- **RAG/Vector DB**: LangChain, DataStax Astra DB
+- **Authentication**: Clerk (optional, easy to add)
+- **Styling**: CSS (custom, responsive, chess-themed)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```sh
+git clone https://github.com/yourusername/chessgpt.git
+cd chessgpt
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```sh
+npm install
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### 3. Set Up Environment Variables
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+Create a `.env.local` file in the root directory and add the following (replace with your actual keys):
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+ASTRA_DB_NAMESPACE=your_namespace
+ASTRA_DB_COLLECTION=your_collection
+ASTRA_DB_API_ENDPOINT=your_astra_db_endpoint
+ASTRA_DB_APPLICATION_TOKEN=your_astra_db_token
+GOOGLE_API_KEY=your_gemini_api_key
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key   # (if using Clerk)
+CLERK_SECRET_KEY=your_clerk_secret_key                         # (if using Clerk)
+```
 
-## Learn More
+### 4. Prepare the Database
 
-To learn more about Next.js, take a look at the following resources:
+Seed your Astra DB with chess data:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```sh
+npm run seed
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This will scrape and embed chess resources into your vector database.
 
-## Deploy on Vercel
+### 5. Run the Development Server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Visit [http://localhost:3000](http://localhost:3000) to use ChessGPT.
+
+---
+
+## Project Structure
+
+```
+/app
+  /api
+    /chat/route.ts      # API route for chat (RAG + Gemini)
+  /components           # UI components (Bubble, LoadingBubble, etc.)
+  /assets               # Static assets (logo, images)
+  /page.tsx             # Main chat UI
+  /layout.tsx           # App layout and metadata
+  /global.css           # Global styles
+/scripts
+  loadDb.ts             # Script to scrape and embed chess data
+.env.local              # Environment variables
+```
+
+---
+
+## Customization
+
+- **Logo**: Replace `/public/assets/logochess.png` with your own logo.
+- **Styling**: Edit `global.css` for theme changes.
+- **Prompt Suggestions**: Update `PromptSuggestionRow` for new starter prompts.
+
+---
+
+## License
+
+MIT
+
+---
+
+## Credits
+
+- [Next.js](https://nextjs.org/)
+- [Google Gemini API](https://ai.google.dev/)
+- [LangChain](https://js.langchain.com/)
+- [DataStax Astra DB](https://www.datastax.com/products/datastax-astra-db)
+- [Clerk](https://clerk.com/)
