@@ -9,7 +9,6 @@ ChessGPT is an AI-powered chatbot web application that answers chess-related que
 - **AI Chatbot**: Ask any chess question and get expert, markdown-formatted answers.
 - **RAG Pipeline**: Combines Gemini LLM with a vector database for context-aware responses.
 - **Modern UI**: Responsive, chess-themed design with animated backgrounds and glowing effects.
-- **Authentication Ready**: Easily add Clerk for user authentication.
 - **Markdown Support**: Answers are formatted for readability and clarity.
 - **Prompt Suggestions**: Quick-start prompts for new users.
 
